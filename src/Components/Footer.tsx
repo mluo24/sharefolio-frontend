@@ -1,6 +1,6 @@
 import { Box, Container, Link, Typography } from "@mui/material";
 
-function Copyright() {
+const Copyright = () => {
     return (
         <Typography variant="body2" color="text.secondary">
             {'Copyright © '}
