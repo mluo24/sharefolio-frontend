@@ -1,9 +1,7 @@
 import { Typography } from "@mui/material";
-import GeneralLayout from "../GeneralLayout"
 
 const Home = () => {
     return (
-        <GeneralLayout>
             <>
                 <Typography variant="h3" component="h1" gutterBottom>
                     Welcome!
@@ -12,7 +10,6 @@ const Home = () => {
                     This is Sharefolio!
                 </Typography>
             </>
-        </GeneralLayout>
     )
 }
 
