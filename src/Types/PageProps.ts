@@ -1,3 +1,3 @@
 export interface GeneralLayoutProps {
-    children?: JSX.Element,
+  children?: JSX.Element;
 }
