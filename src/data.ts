@@ -37,11 +37,13 @@ const categories = [
   {
     id: 1,
     name: "Romance",
+    slug: "romance",
     description: "love",
   },
   {
     id: 2,
     name: "Action",
+    slug: "action",
     description: "action packed",
   },
 ];

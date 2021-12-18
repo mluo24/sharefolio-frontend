@@ -19,9 +19,13 @@ export interface StoryListProps {
   stories: StoryType[];
 }
 
-export interface Category {
+export interface CategoryType {
   id: number;
   name: string;
   slug: string;
   description: string;
+}
+
+export interface CategoryListProps {
+  categories: CategoryType[];
 }
