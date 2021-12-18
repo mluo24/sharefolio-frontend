@@ -15,6 +15,7 @@ import Categories from "./Pages/Categories";
 import PageNotFound from "./Pages/PageNotFound";
 import Story from "./Pages/Story";
 import Chapter from "./Pages/Chapter";
+import Category from "./Pages/Category";
 
 // this part is used to make sure that links use react router for routing
 const LinkBehavior = React.forwardRef<
@@ -57,7 +58,10 @@ const App = () => {
                 element={<Chapter />}
               />
             </Route>
-            <Route path="categories" element={<Categories />} />
+            <Route path="categories">
+              <Route index element={<Categories />} />
+              <Route path=":categoryslug" element={<Category />} />
+            </Route>
           </Route>
           <Route path="*" element={<PageNotFound />} />
         </Routes>
