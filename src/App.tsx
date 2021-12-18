@@ -7,13 +7,16 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-
 import Home from "./Pages/Home";
 import Stories from "./Pages/Stories";
 import GeneralLayout from "./GeneralLayout";
 import React from "react";
 import Categories from "./Pages/Categories";
+import PageNotFound from "./Pages/PageNotFound";
+import Story from "./Pages/Story";
+import Chapter from "./Pages/Chapter";
 
+// this part is used to make sure that links use react router for routing
 const LinkBehavior = React.forwardRef<
   any,
   Omit<RouterLinkProps, "to"> & { href: RouterLinkProps["to"] }
@@ -46,9 +49,17 @@ const App = () => {
         <Routes>
           <Route element={<GeneralLayout />}>
             <Route path="/" element={<Home />} />
-            <Route path="stories" element={<Stories />} />
+            <Route path="stories">
+              <Route index element={<Stories />} />
+              <Route path=":storyid/:storyslug" element={<Story />} />
+              <Route
+                path=":storyid/:storyslug/c/:chapterid"
+                element={<Chapter />}
+              />
+            </Route>
             <Route path="categories" element={<Categories />} />
           </Route>
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
