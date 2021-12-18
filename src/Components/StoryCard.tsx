@@ -19,27 +19,30 @@ const StoryCard = ({ story }: StoryCardProps) => {
       <CardContent>
         <Box sx={{ display: "flex" }} justifyContent="space-between">
           <Typography variant="h5" component="h2">
-            <Link href={`${story.id}/${story.slug}`}>{story.title}</Link>
+            <Link href={`/stories/${story.id}/${story.slug}`}>
+              {story.title}
+            </Link>
             <Typography variant="subtitle2" component="span">
               {" "}
-              by {story.author}
+              by {story.author.username}
             </Typography>
           </Typography>
           <Typography variant="subtitle2">
-            Updated {moment(story.updatedAt).fromNow()}
+            Updated {moment(story.updated_at).fromNow()}
           </Typography>
         </Box>
         <Typography variant="body2">{story.description}</Typography>
         <Divider sx={{ my: 1 }} />
         <Typography variant="body2">
-          Status: {story.status} &middot; Category: {story.category} &middot;
-          Tags:{" "}
-          {story.tags.length === 0
-            ? "None"
-            : story.tags.map((tag) => {
-                return <Chip size="small" label={tag} />;
-              })}
+          Status: {story.status} &middot; Category:{" "}
+          <Link href={`/categories/${story.category}`}>{story.category}</Link>
         </Typography>
+        Tags:{" "}
+        {story.tags.length === 0
+          ? "None"
+          : story.tags.map((tag, i) => {
+              return <Chip size="small" label={tag} key={i} />;
+            })}
       </CardContent>
       <CardActions>
         <IconButton aria-label="like">

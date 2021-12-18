@@ -1,15 +1,22 @@
 import { Typography } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import StoryList from "../Components/StoryList";
-import { getStories } from "../data";
 import { StoryType } from "../Types/ComponentProps";
 
 const Stories = () => {
   const [stories, setStories] = useState<StoryType[]>([]);
 
   useEffect(() => {
-    setStories(getStories());
-  }, [stories]);
+    axios
+      .get("/api/stories")
+      .then((res) => {
+        setStories(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   return (
     <>
