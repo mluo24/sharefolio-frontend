@@ -1,14 +1,14 @@
 import { Typography } from "@mui/material";
 
-const Stories = () => {
+const Categories = () => {
   return (
     <>
       <Typography variant="h3" component="h1" gutterBottom>
-        Stories
+        Categories
       </Typography>
-      <p>Hello! This is where the stories will be.</p>
+      <Typography variant="body1">This is a list of categories.</Typography>
     </>
   );
 };
 
-export default Stories;
+export default Categories;

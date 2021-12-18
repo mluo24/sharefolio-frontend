@@ -1,13 +1,10 @@
-import { Box, Container, Link, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 
 const Copyright = () => {
   return (
     <Typography variant="body2" color="text.secondary">
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Sharefolio
-      </Link>{" "}
-      {new Date().getFullYear()}
+      Sharefolio {new Date().getFullYear()}
       {"."}
     </Typography>
   );

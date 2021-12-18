@@ -12,6 +12,7 @@ import Home from "./Pages/Home";
 import Stories from "./Pages/Stories";
 import GeneralLayout from "./GeneralLayout";
 import React from "react";
+import Categories from "./Pages/Categories";
 
 const LinkBehavior = React.forwardRef<
   any,
@@ -46,6 +47,7 @@ const App = () => {
           <Route element={<GeneralLayout />}>
             <Route path="/" element={<Home />} />
             <Route path="stories" element={<Stories />} />
+            <Route path="categories" element={<Categories />} />
           </Route>
         </Routes>
       </BrowserRouter>

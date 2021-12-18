@@ -10,6 +10,7 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { lightBlue } from "@mui/material/colors";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
 
@@ -43,7 +44,11 @@ const Navbar = () => {
   //   };
 
   return (
-    <AppBar position="static">
+    <AppBar
+      position="static"
+      elevation={0}
+      sx={{ backgroundColor: lightBlue[100], color: "initial" }}
+    >
       <Container maxWidth="md">
         <Toolbar disableGutters>
           <Typography
@@ -56,7 +61,6 @@ const Navbar = () => {
               Sharefolio
             </Link>
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
@@ -116,7 +120,7 @@ const Navbar = () => {
               <Button
                 key={i}
                 href={page.url}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "initial", display: "block" }}
               >
                 {page.name}
               </Button>
