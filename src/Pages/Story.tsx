@@ -1,29 +1,60 @@
-import { Typography } from "@mui/material";
+import { Typography, CircularProgress, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getStory } from "../data";
-import { StoryType } from "../Types/ComponentProps";
+import { ChapterType, StoryType } from "../Types/ComponentProps";
 import PageNotFound from "./PageNotFound";
+import axios from "axios";
+import ChapterList from "../Components/ChapterList";
 
 const Story = () => {
   const { storyid, storyslug } =
     useParams<{ storyid: string; storyslug: string }>();
 
   const [story, setStory] = useState<StoryType>();
+  const [publicChapters, setPublicChapters] = useState<ChapterType[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (storyid !== undefined && storyslug !== undefined)
-      setStory(getStory(parseInt(storyid), storyslug));
-  }, [storyid, storyslug, story]);
+    const fetchData = () => {
+      axios
+        .get(`/api/stories/${storyid}`)
+        .then((res) => {
+          console.log(res.data);
+          setStory(res.data);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      axios
+        .get(`/api/stories/${storyid}/published_chapters`)
+        .then((res) => {
+          console.log(res.data);
+          setPublicChapters(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    fetchData();
+  }, [storyid]);
 
   return (
     <>
-      {story ? (
+      {isLoading ? (
+        <CircularProgress />
+      ) : story && story.slug === storyslug ? (
         <>
-          <Typography variant="h3" component="h1" gutterBottom>
-            {story.title}
+          <Box mb={6}>
+            <Typography variant="h3" component="h1" gutterBottom>
+              {story.title}
+            </Typography>
+            <Typography variant="body1">{story.description}</Typography>
+          </Box>
+          <Typography variant="h5" component="h2">
+            Chapter List
           </Typography>
-          {story.description}
+          <ChapterList chapters={publicChapters} />
         </>
       ) : (
         <PageNotFound />

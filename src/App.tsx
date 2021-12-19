@@ -1,5 +1,10 @@
 import "./App.css";
-import { ThemeProvider, createTheme, LinkProps } from "@mui/material";
+import {
+  ThemeProvider,
+  createTheme,
+  LinkProps,
+  ListItemButtonProps,
+} from "@mui/material";
 import {
   Link as RouterLink,
   LinkProps as RouterLinkProps,
@@ -39,6 +44,11 @@ const theme = createTheme({
         disableRipple: true,
         LinkComponent: LinkBehavior,
       },
+    },
+    MuiListItemButton: {
+      defaultProps: {
+        component: LinkBehavior,
+      } as ListItemButtonProps,
     },
   },
 });

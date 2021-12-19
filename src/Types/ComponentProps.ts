@@ -3,11 +3,14 @@ export interface UserTypePartial {
   username: string;
 }
 
-export interface StoryType {
+export interface StoryTypePartial {
   id: number;
+  slug: string;
+}
+
+export interface StoryType extends StoryTypePartial {
   url: string;
   title: string;
-  slug: string;
   description: string;
   author: UserTypePartial;
   status: string;
@@ -44,7 +47,7 @@ export interface CategoryListProps {
 export interface ChapterType {
   id: number;
   url: string;
-  parent_story: string;
+  parent_story: StoryTypePartial;
   title: string;
   description: string;
   body: string;
@@ -52,4 +55,8 @@ export interface ChapterType {
   likes: UserTypePartial[];
   hit_count: number;
   created_at: string;
+}
+
+export interface ChapterListProps {
+  chapters: ChapterType[];
 }
