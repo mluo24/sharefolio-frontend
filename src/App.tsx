@@ -21,6 +21,8 @@ import PageNotFound from "./Pages/PageNotFound";
 import Story from "./Pages/Story";
 import Chapter from "./Pages/Chapter";
 import Category from "./Pages/Category";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
 
 // this part is used to make sure that links use react router for routing
 const LinkBehavior = React.forwardRef<
@@ -60,6 +62,8 @@ const App = () => {
         <Routes>
           <Route element={<GeneralLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
             <Route path="stories">
               <Route index element={<Stories />} />
               <Route path=":storyid/:storyslug" element={<Story />} />

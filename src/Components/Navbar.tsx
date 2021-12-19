@@ -17,6 +17,7 @@ import React from "react";
 const pages = [
   { name: "Stories", url: "/stories" },
   { name: "Categories", url: "/categories" },
+  { name: "Login", url: "/login" },
 ];
 // const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
