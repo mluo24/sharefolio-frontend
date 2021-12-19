@@ -1,11 +1,11 @@
-import { Typography } from "@mui/material";
+import { Typography, CircularProgress } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import StoryList from "../Components/StoryList";
 import { StoryType } from "../Types/ComponentProps";
 
 const Stories = () => {
-  const [stories, setStories] = useState<StoryType[]>([]);
+  const [stories, setStories] = useState<StoryType[]>();
 
   useEffect(() => {
     axios
@@ -24,7 +24,7 @@ const Stories = () => {
         Stories
       </Typography>
       <p>Hello! This is where the stories will be.</p>
-      <StoryList stories={stories} />
+      {stories ? <StoryList stories={stories} /> : <CircularProgress />}
     </>
   );
 };
