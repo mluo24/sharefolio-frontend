@@ -23,6 +23,11 @@ import Chapter from "./Pages/Chapter";
 import Category from "./Pages/Category";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import store, { persistor } from "./store";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import ProtectedRoute from "./Routes/ProtectedRoute";
+import Profile from "./Pages/Profile";
 
 // this part is used to make sure that links use react router for routing
 const LinkBehavior = React.forwardRef<
@@ -58,28 +63,47 @@ const theme = createTheme({
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<GeneralLayout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="login" element={<Login />} />
-            <Route path="register" element={<Register />} />
-            <Route path="stories">
-              <Route index element={<Stories />} />
-              <Route path=":storyid/:storyslug" element={<Story />} />
-              <Route
-                path=":storyid/:storyslug/c/:chapterid"
-                element={<Chapter />}
-              />
-            </Route>
-            <Route path="categories">
-              <Route index element={<Categories />} />
-              <Route path=":categoryslug" element={<Category />} />
-            </Route>
-          </Route>
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={null}>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<GeneralLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route
+                  path="login"
+                  element={
+                    <ProtectedRoute>
+                      <Login />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="register" element={<Register />} />
+                <Route
+                  path="profile"
+                  element={
+                    <ProtectedRoute>
+                      <Profile />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route path="stories">
+                  <Route index element={<Stories />} />
+                  <Route path=":storyid/:storyslug" element={<Story />} />
+                  <Route
+                    path=":storyid/:storyslug/c/:chapterid"
+                    element={<Chapter />}
+                  />
+                </Route>
+                <Route path="categories">
+                  <Route index element={<Categories />} />
+                  <Route path=":categoryslug" element={<Category />} />
+                </Route>
+              </Route>
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </PersistGate>
+      </Provider>
     </ThemeProvider>
   );
 };
