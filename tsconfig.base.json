@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@rjsf/material-ui/*": [
+        "node_modules/@rjsf/material-ui/dist/*"
+      ]
+    }
+  }
+}

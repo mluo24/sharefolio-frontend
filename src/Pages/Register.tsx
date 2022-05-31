@@ -1,14 +1,38 @@
-import { Box, Typography, Grid, TextField, Button, Link } from "@mui/material";
+import {Box, Typography, Grid, TextField, Button, Link} from "@mui/material";
+import {FormEvent} from "react";
+import axios from "axios";
+import authSlice from "../store/slices/auth";
+import {useDispatch} from "react-redux";
+import {useNavigate} from "react-router-dom";
 
 const Register = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    axios.post('/api/auth/register/', {
+      username: data.get('username'),
+      password: data.get('password'),
+      email: data.get('email'),
+      first_name: data.get('firstName'),
+      last_name: data.get('lastName'),
+    })
+      .then((res) => {
+        dispatch(
+          authSlice.actions.setAuthTokens({
+            token: res.data.access,
+            refreshToken: res.data.refresh,
+          })
+        );
+        dispatch(authSlice.actions.setAccount(res.data.user))
+        navigate("/")
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   };
 
   return (
@@ -23,7 +47,7 @@ const Register = () => {
       <Typography component="h1" variant="h5">
         Sign up
       </Typography>
-      <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+      <Box component="form" noValidate onSubmit={handleSubmit} sx={{mt: 3}}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <TextField
@@ -43,6 +67,15 @@ const Register = () => {
               label="Last Name"
               name="lastName"
               autoComplete="family-name"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
             />
           </Grid>
           <Grid item xs={12}>
@@ -75,7 +108,7 @@ const Register = () => {
             <Button
               type="submit"
               variant="contained"
-              sx={{ py: 1, borderRadius: 10 }}
+              sx={{py: 1, borderRadius: 10}}
             >
               Sign Up
             </Button>

@@ -13,24 +13,24 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { lightBlue } from "@mui/material/colors";
+import {lightBlue} from "@mui/material/colors";
 import MenuIcon from "@mui/icons-material/Menu";
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../store";
-import { stringAvatar } from "../utils/functions";
+import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {RootState} from "../store";
+import {stringAvatar} from "../utils/functions";
 import authSlice from "../store/slices/auth";
 
 const pages = [
-  { name: "Stories", url: "/stories" },
-  { name: "Categories", url: "/categories" },
+  {name: "Stories", url: "/stories"},
+  {name: "Categories", url: "/categories"},
 ];
 const loggedIn = [
-  { name: "Profile", url: "/profile" },
-  { name: "Stories", url: "#" },
-  { name: "Create New", url: "#" },
-  { name: "Liked Stories", url: "#" },
+  {name: "Profile", url: "/profile"},
+  {name: "Stories", url: "#"},
+  {name: "Create New", url: "#"},
+  {name: "Liked Stories", url: "#"},
 ];
 
 const Navbar = () => {
@@ -78,7 +78,7 @@ const Navbar = () => {
     <AppBar
       position="static"
       elevation={0}
-      sx={{ backgroundColor: lightBlue[100], color: "initial" }}
+      sx={{backgroundColor: lightBlue[100], color: "initial"}}
     >
       <Container maxWidth="md">
         <Toolbar disableGutters>
@@ -86,13 +86,13 @@ const Navbar = () => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
+            sx={{mr: 2, display: {xs: "none", md: "flex"}}}
           >
             <Link href="/" color="inherit" underline="none">
               Sharefolio
             </Link>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{flexGrow: 1, display: {xs: "flex", md: "none"}}}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -101,7 +101,7 @@ const Navbar = () => {
               onClick={handleOpenNavMenu}
               color="inherit"
             >
-              <MenuIcon />
+              <MenuIcon/>
             </IconButton>
             <Menu
               id="menu-appbar"
@@ -118,7 +118,7 @@ const Navbar = () => {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: { xs: "block", md: "none" },
+                display: {xs: "block", md: "none"},
               }}
             >
               {pages.map((page, i) => (
@@ -137,8 +137,8 @@ const Navbar = () => {
             component="div"
             sx={{
               flexGrow: 1,
-              display: { xs: "flex", md: "none" },
-              justifyContent: { xs: "flex-end" },
+              display: {xs: "flex", md: "none"},
+              justifyContent: {xs: "flex-end"},
             }}
           >
             Sharefolio
@@ -146,15 +146,15 @@ const Navbar = () => {
           <Box
             sx={{
               flexGrow: 1,
-              display: { xs: "none", md: "flex" },
-              justifyContent: { md: "flex-end" },
+              display: {xs: "none", md: "flex"},
+              justifyContent: {md: "flex-end"},
             }}
           >
             {pages.map((page, i) => (
               <Button
                 key={i}
                 href={page.url}
-                sx={{ my: 2, color: "initial", display: "block" }}
+                sx={{my: 2, color: "initial", display: "block"}}
               >
                 {page.name}
               </Button>
@@ -162,21 +162,21 @@ const Navbar = () => {
             {!auth.account && (
               <Button
                 href="/login"
-                sx={{ my: 2, color: "initial", display: "block" }}
+                sx={{my: 2, color: "initial", display: "block"}}
               >
                 Login
               </Button>
             )}
           </Box>
           {auth.account && (
-            <Box sx={{ flexGrow: 0, ml: 1 }}>
+            <Box sx={{flexGrow: 0, ml: 1}}>
               <Tooltip title="Open user menu">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <IconButton onClick={handleOpenUserMenu} sx={{p: 0}}>
                   <Avatar {...stringAvatar(auth.account.username)} />
                 </IconButton>
               </Tooltip>
               <Menu
-                sx={{ mt: "45px" }}
+                sx={{mt: "45px"}}
                 id="menu-appbar"
                 anchorEl={anchorElUser}
                 anchorOrigin={{
@@ -200,7 +200,7 @@ const Navbar = () => {
                     <Typography textAlign="center">{option.name}</Typography>
                   </MenuItem>
                 ))}
-                <Divider />
+                <Divider/>
                 <MenuItem onClick={handleLogout}>
                   <Typography textAlign="center">Logout</Typography>
                 </MenuItem>

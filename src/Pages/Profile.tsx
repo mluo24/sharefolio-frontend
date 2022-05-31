@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import {Box, Button, Typography} from "@mui/material";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
@@ -13,6 +13,7 @@ const Profile = () => {
       <Typography variant="body1">
         Name: {account?.first_name} {account?.last_name}
       </Typography>
+      <Button variant="contained" href="/profile/edit">Edit</Button>
     </Box>
   );
 };

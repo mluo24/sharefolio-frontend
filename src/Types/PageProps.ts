@@ -9,6 +9,14 @@ export interface UserType {
   last_name: string;
   email: string;
   username: string;
+  userprofile: number;
+}
+
+export interface UserProfileType {
+  id: string;
+  birth_date?: string;
+  location?: string;
+  bio?: string
 }
 
 export interface AccountResponse {
